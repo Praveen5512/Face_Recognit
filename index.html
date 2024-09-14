@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Face recogoniton</title>
+    <link rel="stylesheet" href="library/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="library/bootstrap/bootstrap.bundle.min.js"></script>
+  </head>
+  <body>
+    <div class="cont bg-dark">
+      <h1 class="text-center text-light">Video Recorder</h1>
+      <div class="d-flex justify-content-center">
+        <video
+          class="rounded mb-5"
+          id="video"
+          src=""
+          height="500px"
+          width="500px"
+        ></video>
+      </div>
+      <div class="d-flex justify-content-center">
+        <button class="btn btn-success mx-2 py-2">Start Recording</button>
+        <button class="btn btn-danger mx-2 py-2">Start Recording</button>
+      </div>
+    </div>
+    <script>
+      var front = false;
+      var video = document.getElementById("video");
+      var constraints = {
+        video: {
+          facingMode: front ? "user" : "environment",
+          width: 640,
+          height: 480,
+        },
+      };
+      navigator.mediaDevices
+        .getUserMedia(constraints)
+        .then(function (mediaStream) {
+          video.srcObject = mediaStream;
+          video.onloadedmetadata = function (e) {
+            video.play();
+          };
+        });
+    </script>
+    <script src="script.js"></script>
+  </body>
+</html>
